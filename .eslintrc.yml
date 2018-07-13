@@ -1,0 +1,47 @@
+---
+extends: google
+parser: babel-eslint
+env:
+  node: true
+  browser: true
+  jquery: false
+  es6: true
+settings:
+  react:
+    pragma: React
+# 规则 ： 0(off) 1(warn) 2(error)
+rules:
+  no-invalid-this: off
+  switch-colon-spacing: off
+# js注释文档
+  require-jsdoc: off
+  valid-jsdoc: off
+  arrow-parens:
+  - error
+  - as-needed
+  - requireForBlockBody: false
+# 缩进
+  indent:
+  - error
+  - 2
+  eqeqeq:
+  - error
+  - smart
+  spaced-comment: off
+  one-var: off
+  no-extend-native: off
+  comma-dangle:
+  - error
+  - never
+  camelcase: off
+  default-case: off
+  linebreak-style: off
+  max-len: off
+  prefer-spread: warn
+  no-console: off
+  comma-style:
+  - error
+  - last
+  object-curly-spacing:
+  - error
+  - always
