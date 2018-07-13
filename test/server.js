@@ -1,6 +1,7 @@
 const WebSocket = require('ws');
 
 const wss = new WebSocket.Server({ port: 9001 });
+const wss2 = new WebSocket.Server({ port: 9002 });
 
 function noop() { }
 
@@ -26,9 +27,30 @@ wss.on('connection', function(ws) {
   });
 });
 
+wss2.on('connection', function(ws) {
+  ws.isAlive = true;
+  ws.on('pong', heartbeat);
+  ws.on('message', function(data) {
+    const req = JSON.parse(data);
+    console.log(req);
+    ws.send(JSON.stringify({
+      refid: req.refid,
+      payload: {
+        time: Date.now(),
+        req: req.payload
+      }
+    }));
+  });
+});
+
 // 心跳
 setInterval(function ping() {
   wss.clients.forEach(function each(ws) {
+    if (ws.isAlive === false) return ws.terminate();
+    ws.isAlive = false;
+    ws.ping(noop);
+  });
+  wss2.clients.forEach(function each(ws) {
     if (ws.isAlive === false) return ws.terminate();
     ws.isAlive = false;
     ws.ping(noop);
