@@ -3,8 +3,8 @@ const HttpBus = require('../lib/http-bus');
 const httpbus = new HttpBus({
   port: 8001,
   hosts: [
-    { label: 'hq', host: 'localhost', port: 9001 },
-    { label: 'jy', host: 'localhost', port: 9002 }
+    { link: '1', host: 'localhost', port: 9001 },
+    { link: '2', host: 'localhost', port: 9002 }
   ],
   prefix: '/reqxml',
   staticRoot: 'E:\\hlcrm\\dist',

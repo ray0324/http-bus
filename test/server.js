@@ -15,10 +15,10 @@ wss.on('connection', function(ws) {
   ws.isAlive = true;
   ws.on('pong', heartbeat);
   ws.on('message', function(data) {
+    console.log( 'wss:', data);
     const req = JSON.parse(data);
-    console.log(req);
     ws.send(JSON.stringify({
-      refid: req.refid,
+      reqid: req.reqid,
       payload: {
         time: Date.now(),
         req: req.payload
@@ -31,10 +31,10 @@ wss2.on('connection', function(ws) {
   ws.isAlive = true;
   ws.on('pong', heartbeat);
   ws.on('message', function(data) {
+    console.log('wss2:', data);
     const req = JSON.parse(data);
-    console.log(req);
     ws.send(JSON.stringify({
-      refid: req.refid,
+      reqid: req.reqid,
       payload: {
         time: Date.now(),
         req: req.payload
