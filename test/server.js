@@ -15,7 +15,7 @@ wss1.on('connection', function(ws) {
     const { reqid, ...payload } = JSON.parse(data);
     console.log('wss1msg:', payload);
     const resp = {
-      desc: '行情服务'
+      desc: '服务1'
     };
     ws.send(JSON.stringify({ reqid, payload: resp }));
   });
@@ -28,7 +28,7 @@ wss2.on('connection', function(ws) {
     const { reqid, ...payload } = JSON.parse(data);
     console.log('wss2msg:', payload);
     const resp = {
-      desc: '资讯服务'
+      desc: '服务2'
     };
     ws.send(JSON.stringify({ reqid, payload: resp }));
   });
