@@ -30,7 +30,7 @@ wss2.on('connection', function(ws) {
     const resp = {
       desc: '服务2'
     };
-    ws.send(JSON.stringify({ reqid, payload: resp }));
+    ws.send(JSON.stringify({ reqid, payload: { resp, ...payload } }));
   });
 });
 
