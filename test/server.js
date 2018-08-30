@@ -1,14 +1,14 @@
 const WebSocket = require('ws');
 function noop() { }
 
-const wss1 = new WebSocket.Server({ port: 9001 });
-const wss2 = new WebSocket.Server({ port: 9002 });
+const server1 = new WebSocket.Server({ port: 9001 });
+const server2 = new WebSocket.Server({ port: 9002 });
 
 function heartbeat() {
   this.isAlive = true;
 }
 
-wss1.on('connection', function(ws) {
+server1.on('connection', function(ws) {
   ws.isAlive = true;
   ws.on('pong', heartbeat);
   ws.on('message', function(data) {
@@ -21,7 +21,7 @@ wss1.on('connection', function(ws) {
   });
 });
 
-wss2.on('connection', function(ws) {
+server2.on('connection', function(ws) {
   ws.isAlive = true;
   ws.on('pong', heartbeat);
   ws.on('message', function(data) {
@@ -36,13 +36,13 @@ wss2.on('connection', function(ws) {
 
 // 心跳
 setInterval(function ping() {
-  console.log('wss1.clients:' + wss1.clients.size + ' wss2.clients:' + wss2.clients.size);
-  wss1.clients.forEach(function each(ws) {
+  console.log('wss1.clients:' + server1.clients.size + ' wss2.clients:' + server2.clients.size);
+  server1.clients.forEach(function each(ws) {
     if (ws.isAlive === false) return ws.terminate();
     ws.isAlive = false;
     ws.ping(noop);
   });
-  wss2.clients.forEach(function each(ws) {
+  server2.clients.forEach(function each(ws) {
     if (ws.isAlive === false) return ws.terminate();
     ws.isAlive = false;
     ws.ping(noop);
