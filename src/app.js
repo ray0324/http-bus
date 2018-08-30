@@ -8,15 +8,12 @@ const httpbus = new HttpBus({
   defaultIndex: 'index.html'
 });
 
-// 写日志
 httpbus.on('info', function(data) {
   console.log('info:', data);
 });
-// 写日志
 httpbus.on('request', function(data) {
   console.log('request:', data);
 });
-// 写日志
 httpbus.on('response', function(data) {
   console.log('response:', data);
 });
