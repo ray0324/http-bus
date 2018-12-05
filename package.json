@@ -10,7 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "serve-handler": "^5.0.0",
-    "ws": "^6.0.0"
+    "debug": "^4.1.0",
+    "serve-handler": "^5.0.7",
+    "ws": "^6.1.2"
+  },
+  "devDependencies": {
+    "ansi-diff-stream": "^1.2.1"
   }
 }

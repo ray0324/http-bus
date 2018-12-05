@@ -1,4 +1,6 @@
 const WebSocket = require('ws');
+const diff = require('ansi-diff-stream')();
+
 function noop() { }
 
 const server1 = new WebSocket.Server({ port: 9001 });
@@ -36,7 +38,8 @@ server2.on('connection', function(ws) {
 
 // 心跳
 setInterval(function ping() {
-  console.log('wss1.clients:' + server1.clients.size + ' wss2.clients:' + server2.clients.size);
+  diff.write('wss1.clients:' + server1.clients.size + ' wss2.clients:' + server2.clients.size);
+  // console.log('wss1.clients:' + server1.clients.size + ' wss2.clients:' + server2.clients.size);
   server1.clients.forEach(function each(ws) {
     if (ws.isAlive === false) return ws.terminate();
     ws.isAlive = false;
@@ -47,4 +50,6 @@ setInterval(function ping() {
     ws.isAlive = false;
     ws.ping(noop);
   });
-}, 10000);
+}, 1000);
+
+diff.pipe(process.stdout);
